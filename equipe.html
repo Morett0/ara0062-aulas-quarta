@@ -6,6 +6,17 @@
     <title>O Estalajadeiro - O Refúgio do Viajante</title>
     <link rel="stylesheet" href="pico.css">
     <link rel="stylesheet" href="estilos.css">
+    
+    <script>
+        (function() {
+            const temaSalvo = localStorage.getItem('tema');
+            if (temaSalvo) {
+                document.documentElement.setAttribute('data-theme', temaSalvo);
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
 </head>
 <body>
     <header>
@@ -15,6 +26,8 @@
             <a href="cardapio.html">Provisões</a>
             <a href="contato.html">Mensageiro</a>
             <a href="equipe.html" class="active">O Estalajadeiro</a>
+            
+            <a href="#" role="button" id="btn-tema" style="padding: 0.5rem 1rem; margin-left: 1rem;">Mudar Tema</a>
         </nav>
     </header>
 
@@ -33,5 +46,7 @@
     <footer>
         <p>&copy; 2025 O Refúgio do Viajante. Todos os direitos reservados.</p>
     </footer>
+
+    <script src="js/tema.js"></script>
 </body>
 </html>

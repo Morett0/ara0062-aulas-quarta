@@ -1,0 +1,37 @@
+[
+    {
+        "imagem": "imagens/cafe_ferreiro.png",
+        "alt": "Café forte",
+        "item": "Bebida do Ferreiro",
+        "descricao": "Um café forte e escuro como a noite, para despertar o espírito aventureiro.",
+        "preco": "7 moedas de cobre"
+    },
+    {
+        "imagem": "imagens/leite_quente_vale.png",
+        "alt": "Bebida cremosa",
+        "item": "Leite Quente do Vale",
+        "descricao": "Uma bebida cremosa com especiarias e um toque de mel, coberta com espuma. Aconchego puro.",
+        "preco": "10 moedas de cobre"
+    },
+    {
+        "imagem": "imagens/pao_anao.png",
+        "alt": "Pães de queijo",
+        "item": "Pães do Anão",
+        "descricao": "Pequenos e robustos pães de queijo, perfeitos para acompanhar qualquer refeição.",
+        "preco": "9 moedas de cobre"
+    },
+    {
+        "imagem": "imagens/torta_bosque_sombrio.png",
+        "alt": "Bolo de Chocolate",
+        "item": "Torta do Bosque Sombrio",
+        "descricao": "Uma fatia generosa de bolo de chocolate denso, com recheio de frutas silvestres.",
+        "preco": "14 moedas de cobre"
+    },
+    {
+        "imagem": "imagens/suco.png",
+        "alt": "Suco de Laranja",
+        "item": "Néctar do Pomar Dourado",
+        "descricao": "Suco de laranjas e maçãs colhidas sob o sol da manhã, espremido na hora.",
+        "preco": "8 moedas de cobre"
+    }
+]

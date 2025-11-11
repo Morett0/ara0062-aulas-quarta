@@ -210,3 +210,77 @@ button:hover, input[type="submit"]:hover {
     display: block;
     margin: 0 auto;
 }
+
+
+/* --- DEFINIÇÃO DO TEMA ESCURO (REQUISITO 3) --- */
+
+/* Quando o <html> tiver o atributo data-theme="dark" */
+[data-theme="dark"] {
+    /* Redefinimos as variáveis de cor */
+    --cor-fundo: #2D2A26; /* Fundo escuro */
+    --cor-texto: #CFC6BC; /* Texto claro */
+    --cor-titulo: #9DBC9D; /* Título verde mais claro */
+    --cor-destaque: #E89F7A; /* Destaque se mantém */
+    --cor-borda-suave: #4A443E; /* Borda suave escura */
+    --cor-fundo-container: #3E3832; /* Fundo do container escuro */
+
+    /* Ajustes específicos para o tema escuro */
+    
+    header h1 {
+        color: #D4C8C0; /* Cor do título principal */
+    }
+
+    nav a:hover, nav a.active {
+        background-color: #4A443E; /* Hover do menu */
+    }
+    
+    main > article, main > form {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra mais visível */
+    }
+
+    main > article:hover, main > form:hover {
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    img {
+        border-color: var(--cor-borda-suave);
+    }
+
+    /* Tabelas */
+    thead th {
+        background-color: #4A443E;
+    }
+
+    tbody tr:nth-of-type(even) {
+        background-color: #38332E;
+    }
+
+    tbody tr:hover {
+        background-color: #504942;
+    }
+    
+    /* Inputs do formulário */
+    input, textarea {
+        background-color: #4A443E;
+        border-color: #5D544C;
+        color: var(--cor-texto);
+    }
+
+    /* Ajusta cores do Pico.css no tema escuro */
+    [data-theme="dark"] input,
+    [data-theme="dark"] textarea {
+        --pico-form-element-background-color: var(--cor-fundo-container);
+        --pico-form-element-border-color: var(--cor-borda-suave);
+        --pico-form-element-color: var(--cor-texto);
+        --pico-form-element-placeholder-color: #8a8177;
+    }
+    
+    [data-theme="dark"] input:focus,
+    [data-theme="dark"] textarea:focus {
+        --pico-form-element-active-background-color: var(--cor-fundo-container);
+        --pico-form-element-active-border-color: var(--cor-destaque);
+        --pico-form-element-focus-color: var(--cor-destaque);
+        background-color: var(--pico-form-element-active-background-color);
+        border-color: var(--pico-form-element-active-border-color);
+    }
+}
