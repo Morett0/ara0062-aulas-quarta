@@ -9,11 +9,22 @@
     --cor-fundo-container: #FFFFFF;
 }
 
-body {
+/* * CORREÇÃO DO BUG VISUAL: 
+  * Aplicamos a fonte e a cor principal ao HTML 
+  * e a imagem de fundo também ao HTML (e não ao BODY).
+  * Isso resolve o bug do "quadrado" no modo escuro.
+*/
+html {
     font-family: 'Mali', cursive;
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
     background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+}
+
+/* Deixamos o body limpo para o PICO.CSS geri-lo */
+body {
+    font-family: 'Mali', cursive;
+    color: var(--cor-texto);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -123,7 +134,6 @@ table {
     
     /* PROPRIEDADES IMPORTANTES PARA A DISTRIBUIÇÃO DAS COLUNAS */
     table-layout: fixed; /* Força a tabela a respeitar as larguras definidas */
-    /* display: table; - Não é necessário se table-layout: fixed for usado em <table> */
 }
 
 th, td {
@@ -171,14 +181,12 @@ button:hover, input[type="submit"]:hover {
     margin: 1.5rem auto 0 auto;
 }
 
-/* 1. LARGURA DA PRIMEIRA COLUNA (IMAGEM) E CENTRALIZAÇÃO */
 .cardapio-table th:first-child,
 .cardapio-table td:first-child {
     width: 320px; /* Largura fixa para a imagem */
     text-align: center;
 }
 
-/* 2. LARGURA DA SEGUNDA COLUNA (ITEM) - Deixamos mais flexível */
 .cardapio-table th:nth-child(2),
 .cardapio-table td:nth-child(2) {
     width: 25%; /* Uma porção do espaço restante */
@@ -186,7 +194,6 @@ button:hover, input[type="submit"]:hover {
     vertical-align: middle;
 }
 
-/* 3. LARGURA DA TERCEIRA COLUNA (DESCRIÇÃO) - Usará o restante do espaço */
 .cardapio-table th:nth-child(3),
 .cardapio-table td:nth-child(3) {
     width: 25%; /* Ocupa o espaço restante */
@@ -194,7 +201,6 @@ button:hover, input[type="submit"]:hover {
     vertical-align: middle;
 }
 
-/* 4. LARGURA DA QUARTA COLUNA (PREÇO) E ALINHAMENTO */
 .cardapio-table th:nth-child(4),
 .cardapio-table td:nth-child(4) {
     width: 25%; /* Largura fixa para o preço */
@@ -202,7 +208,6 @@ button:hover, input[type="submit"]:hover {
     vertical-align: middle;
 }
 
-/* 2. TAMANHO DA IMAGEM DENTRO DA CÉLULA - Mantido */
 .cardapio-table img {
     width: 300px;
     height: 300px;
@@ -214,7 +219,6 @@ button:hover, input[type="submit"]:hover {
 
 /* --- DEFINIÇÃO DO TEMA ESCURO (REQUISITO 3) --- */
 
-/* Quando o <html> tiver o atributo data-theme="dark" */
 [data-theme="dark"] {
     /* Redefinimos as variáveis de cor */
     --cor-fundo: #2D2A26; /* Fundo escuro */
