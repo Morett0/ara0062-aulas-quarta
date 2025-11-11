@@ -7,21 +7,21 @@
     --cor-destaque: #E89F7A;
     --cor-borda-suave: #EAE2D6;
     --cor-fundo-container: #FFFFFF;
+
+    /* --- CORREÇÃO 1: Diz ao Pico para usar NOSSA cor de fundo --- */
+    --pico-background-color: var(--cor-fundo); 
 }
 
-/* * CORREÇÃO DO BUG VISUAL: 
-  * Aplicamos a fonte e a cor principal ao HTML 
-  * e a imagem de fundo também ao HTML (e não ao BODY).
-  * Isso resolve o bug do "quadrado" no modo escuro.
+/* * --- CORREÇÃO 2: Aplicamos a textura e fonte ao HTML ---
+ * Removemos a 'background-color' daqui para não ter conflito.
 */
 html {
     font-family: 'Mali', cursive;
-    background-color: var(--cor-fundo);
     color: var(--cor-texto);
     background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
 }
 
-/* Deixamos o body limpo para o PICO.CSS geri-lo */
+/* Deixamos o body apenas com as regras de fonte e cor */
 body {
     font-family: 'Mali', cursive;
     color: var(--cor-texto);
@@ -227,6 +227,9 @@ button:hover, input[type="submit"]:hover {
     --cor-destaque: #E89F7A; /* Destaque se mantém */
     --cor-borda-suave: #4A443E; /* Borda suave escura */
     --cor-fundo-container: #3E3832; /* Fundo do container escuro */
+
+    /* --- CORREÇÃO 3: Diz ao Pico para usar NOSSA cor de fundo escura --- */
+    --pico-background-color: var(--cor-fundo);
 
     /* Ajustes específicos para o tema escuro */
     
