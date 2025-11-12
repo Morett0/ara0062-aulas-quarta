@@ -24,22 +24,6 @@ body {
     font-family: 'Mali', cursive;
     color: var(--cor-texto);
     background-color: var(--cor-fundo);
-    /* Textura de papel feita com CSS */
-    background-image: 
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(93, 84, 76, 0.02) 2px,
-            rgba(93, 84, 76, 0.02) 4px
-        ),
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(93, 84, 76, 0.02) 2px,
-            rgba(93, 84, 76, 0.02) 4px
-        );
     min-height: 100vh;
 }
 
