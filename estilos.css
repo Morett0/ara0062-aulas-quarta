@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Mali:wght@400;600&family=IM+Fell+English+SC&display=swap');
 
 :root {
-    --cor-fundo: #FBF8F0;
+    --cor-fundo: #F9EFEF;
     --cor-texto: #5D544C;
     --cor-titulo: #587458;
     --cor-destaque: #E89F7A;
@@ -23,8 +23,23 @@ html {
 body {
     font-family: 'Mali', cursive;
     color: var(--cor-texto);
-    background-color: var(--cor-fundo); /* ADICIONE ESTA LINHA - cor de fundo sólida */
-    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    background-color: var(--cor-fundo);
+    /* Textura de papel feita com CSS */
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(93, 84, 76, 0.02) 2px,
+            rgba(93, 84, 76, 0.02) 4px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(93, 84, 76, 0.02) 2px,
+            rgba(93, 84, 76, 0.02) 4px
+        );
     min-height: 100vh;
 }
 
@@ -86,7 +101,7 @@ nav a {
 
 nav a:hover, nav a.active {
     color: var(--cor-titulo);
-    background-color: #f7f2e9; 
+    background-color: #ffffff; 
     border-bottom: none; 
 }
 
@@ -145,7 +160,7 @@ th, td {
 }
 
 thead th {
-    background-color: #f7f2e9;
+    background-color: #e0e0e0;
     color: var(--cor-titulo);
     font-weight: 600;
 }
