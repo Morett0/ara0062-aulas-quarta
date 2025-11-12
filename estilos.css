@@ -18,13 +18,14 @@
 html {
     font-family: 'Mali', cursive;
     color: var(--cor-texto);
-    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
 }
 
-/* Deixamos o body apenas com as regras de fonte e cor */
 body {
     font-family: 'Mali', cursive;
     color: var(--cor-texto);
+    background-color: var(--cor-fundo); /* ADICIONE ESTA LINHA - cor de fundo sólida */
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
