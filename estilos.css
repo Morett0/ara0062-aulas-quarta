@@ -814,7 +814,7 @@ input[type="file"]::-webkit-file-upload-button {
     color: #ccc;
     padding: 10px 0;
     height: 150px;
-    font-size: 1.2rem;
+    font-size: 3rem;
     font-family: var(--fonte-titulo);
 }
 
@@ -841,4 +841,41 @@ input[type="file"]::-webkit-file-upload-button {
 @keyframes zoomIn {
     from {transform:scale(0)} 
     to {transform:scale(1)}
+}
+
+/* ============================================
+   FEEDBACK VISUAL (NOTIFICAÇÕES)
+   ============================================ */
+.mensagem-feedback {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideInRight 0.5s ease forwards;
+    max-width: 90%;
+}
+
+.mensagem-sucesso {
+    background-color: var(--cor-sucesso); /* Verde do seu tema */
+}
+
+.mensagem-erro {
+    background-color: var(--cor-erro); /* Vermelho do seu tema */
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
 }
