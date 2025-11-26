@@ -212,6 +212,38 @@ button:hover, input[type="submit"]:hover {
     margin: 0 auto;
 }
 
+/* --- Ajustes globais para a coluna Ações (melhora em larguras intermediárias) --- */
+.cardapio-table th:last-child,
+.cardapio-table td[data-label="Ações"] {
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap; /* evita quebra indesejada no título */
+}
+
+.cardapio-table .acoes-botoes {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* permite quebra quando necessário */
+}
+
+.cardapio-table .acoes-botoes > * {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.6rem; /* reduzido para caber melhor */
+    margin: 0;
+    min-width: 0; /* importante para permitir shrink em flex */
+    flex-shrink: 1; /* permite reduzir quando o espaço é limitado */
+    white-space: nowrap; /* manter texto do botão em uma linha quando possível */
+}
+
+/* Se ainda faltar espaço, permitir que os botões quebrem em duas linhas em telas pequenas/estreitas */
+.cardapio-table .acoes-botoes.two-line > * {
+    flex: 1 1 48%;
+}
+
 
 /* --- DEFINIÇÃO DO TEMA ESCURO (REQUISITO 3) --- */
 
@@ -289,6 +321,15 @@ button:hover, input[type="submit"]:hover {
 }
 
 /* --- REGRA RESPONSIVA PARA ECRÃS PEQUENOS (MOBILE FIRST) --- */
+
+/* --- Breakpoint intermediário: duas colunas para botões de Ações (tablets/desktop estreitos) --- */
+@media screen and (max-width: 1000px) {
+    .cardapio-table .acoes-botoes > * {
+        flex: 1 1 48%;
+        max-width: 48%;
+        box-sizing: border-box;
+    }
+}
 
 @media screen and (max-width: 800px) {
     /* 1. Resetar o comportamento da tabela para permitir o empilhamento */
