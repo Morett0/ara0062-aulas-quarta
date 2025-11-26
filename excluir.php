@@ -1,22 +1,20 @@
 <?php
-include 'auth.php'; // Adicione esta linha na primeira linha do arquivo
-include 'conexao.php';
-// ... resto do código
-?>
-
-<?php
+include 'auth.php';
 include 'conexao.php';
 
 $id = $_GET['id'];
+$id = mysqli_real_escape_string($conn, $id); // Segurança extra
 
 $sql = "DELETE FROM cardapio WHERE id = $id";
 
 if (mysqli_query($conn, $sql)) {
-    echo "<script>
-        alert('Item deletado com sucesso!');
-        window.location.href = 'cardapio.php';
-    </script>";
+    $_SESSION['mensagem'] = "Item removido do cardápio.";
+    $_SESSION['tipo_mensagem'] = "mensagem-sucesso";
 } else {
-    echo "Erro ao deletar: " . mysqli_error($conn);
+    $_SESSION['mensagem'] = "Não foi possível remover o item.";
+    $_SESSION['tipo_mensagem'] = "mensagem-erro";
 }
+
+header('Location: admin.php');
+exit;
 ?>

@@ -1,5 +1,5 @@
 // ============================================
-// ALTERNÂNCIA DE TEMA APRIMORADA
+// ALTERNÂNCIA DE TEMA APRIMORADA (CORRIGIDO)
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnTema = document.getElementById('btn-tema');
     const html = document.documentElement;
     
-    if (!btnTema) return;
+    // Se não houver botão, ainda aplica o tema mas sai
+    if (!btnTema && !localStorage.getItem('tema')) return;
 
     // ============================================
     // DETECTA PREFERÊNCIA DO SISTEMA
@@ -29,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return temaSalvo;
         }
         
-        // Se não tem tema salvo, usa a preferência do sistema
         return detectarPreferenciaSistema();
     }
 
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // APLICA TEMA COM ANIMAÇÃO
     // ============================================
     function aplicarTema(tema, comAnimacao = true) {
-        // Adiciona classe de transição
+        // Adiciona classe de transição apenas se for interação do usuário
         if (comAnimacao) {
             html.classList.add('tema-transicao');
         }
@@ -46,31 +46,37 @@ document.addEventListener('DOMContentLoaded', function() {
         html.setAttribute('data-theme', tema);
         localStorage.setItem('tema', tema);
         
-        // Atualiza o texto do botão com ícones
-        const icone = tema === 'dark' ? '☀️' : '🌙';
-        const texto = tema === 'dark' ? 'Modo Claro' : 'Modo Escuro';
-        btnTema.innerHTML = `<span style="margin-right: 0.5rem;">${icone}</span>${texto}`;
-        
-        // Adiciona atributo ARIA para acessibilidade
-        btnTema.setAttribute('aria-label', `Ativar ${texto}`);
-        
-        // Efeito visual no botão
-        btnTema.style.transform = 'scale(1.1)';
-        setTimeout(() => btnTema.style.transform = 'scale(1)', 200);
+        // Atualiza o texto do botão com ícones (se o botão existir na página)
+        if (btnTema) {
+            const icone = tema === 'dark' ? '☀️' : '🌙';
+            const texto = tema === 'dark' ? 'Modo Claro' : 'Modo Escuro';
+            btnTema.innerHTML = `<span style="margin-right: 0.5rem;">${icone}</span>${texto}`;
+            btnTema.setAttribute('aria-label', `Ativar ${texto}`);
+            
+            // Efeito visual no botão apenas no clique
+            if (comAnimacao) {
+                btnTema.style.transform = 'scale(1.1)';
+                setTimeout(() => btnTema.style.transform = 'scale(1)', 200);
+            }
+        }
         
         // Remove classe de transição após animação
         if (comAnimacao) {
             setTimeout(() => html.classList.remove('tema-transicao'), 300);
+            
+            // CORREÇÃO: A notificação agora só aparece se comAnimacao for true (clique)
+            mostrarNotificacaoTema(tema);
         }
-        
-        // Notificação visual (opcional)
-        mostrarNotificacaoTema(tema);
     }
 
     // ============================================
     // NOTIFICAÇÃO DE MUDANÇA DE TEMA
     // ============================================
     function mostrarNotificacaoTema(tema) {
+        // Remove notificação anterior se houver
+        const antiga = document.querySelector('.notificacao-tema');
+        if (antiga) antiga.remove();
+
         const notificacao = document.createElement('div');
         notificacao.className = 'notificacao-tema';
         
@@ -101,24 +107,17 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.body.appendChild(notificacao);
         
-        // Adiciona estilos de animação
+        // Adiciona estilos de animação se não existirem
         if (!document.getElementById('tema-animacao-style')) {
             const style = document.createElement('style');
             style.id = 'tema-animacao-style';
             style.textContent = `
                 @keyframes slideUp {
-                    to {
-                        transform: translateX(-50%) translateY(0);
-                    }
+                    to { transform: translateX(-50%) translateY(0); }
                 }
                 @keyframes slideDown {
-                    from {
-                        transform: translateX(-50%) translateY(0);
-                    }
-                    to {
-                        transform: translateX(-50%) translateY(100px);
-                        opacity: 0;
-                    }
+                    from { transform: translateX(-50%) translateY(0); }
+                    to { transform: translateX(-50%) translateY(100px); opacity: 0; }
                 }
                 .tema-transicao * {
                     transition: background-color 0.3s ease, 
@@ -133,28 +132,31 @@ document.addEventListener('DOMContentLoaded', function() {
         // Remove notificação após 2 segundos
         setTimeout(() => {
             notificacao.style.animation = 'slideDown 0.3s ease forwards';
-            setTimeout(() => notificacao.remove(), 300);
+            setTimeout(() => {
+                if(notificacao.parentNode) notificacao.remove();
+            }, 300);
         }, 2000);
     }
 
     // ============================================
     // EVENTO DE CLIQUE NO BOTÃO
     // ============================================
-    btnTema.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const temaAtual = html.getAttribute('data-theme') || 'light';
-        const novoTema = temaAtual === 'light' ? 'dark' : 'light';
-        
-        aplicarTema(novoTema, true);
-    });
+    if (btnTema) {
+        btnTema.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const temaAtual = html.getAttribute('data-theme') || 'light';
+            const novoTema = temaAtual === 'light' ? 'dark' : 'light';
+            
+            aplicarTema(novoTema, true); // Aqui comAnimacao é TRUE -> Mostra notificação
+        });
+    }
 
     // ============================================
     // DETECTA MUDANÇA NA PREFERÊNCIA DO SISTEMA
     // ============================================
     if (window.matchMedia) {
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            // Só muda automaticamente se o usuário não tiver definido uma preferência
             if (!localStorage.getItem('tema')) {
                 const novoTema = e.matches ? 'dark' : 'light';
                 aplicarTema(novoTema, true);
@@ -166,18 +168,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // ATALHO DE TECLADO (Ctrl/Cmd + K)
     // ============================================
     document.addEventListener('keydown', function(e) {
-        // Ctrl+K ou Cmd+K
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
             e.preventDefault();
-            btnTema.click();
+            if(btnTema) btnTema.click();
         }
     });
 
     // ============================================
-    // INICIALIZAÇÃO
+    // INICIALIZAÇÃO (Ao carregar a página)
     // ============================================
     const temaInicial = carregarTema();
-    aplicarTema(temaInicial, false);
+    aplicarTema(temaInicial, false); // Aqui comAnimacao é FALSE -> NÃO mostra notificação
 
     // ============================================
     // TRANSIÇÃO SUAVE AO CARREGAR A PÁGINA
@@ -185,10 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('load', function() {
         document.body.style.opacity = '0';
         document.body.style.transition = 'opacity 0.3s ease';
-        
-        setTimeout(() => {
-            document.body.style.opacity = '1';
-        }, 10);
+        setTimeout(() => { document.body.style.opacity = '1'; }, 10);
     });
 
     // ============================================
@@ -199,14 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('tema', temaAtual);
     });
 
-    // ============================================
-    // ADICIONA TOOLTIP NO BOTÃO
-    // ============================================
-    btnTema.setAttribute('title', 'Alternar tema (Ctrl+K)');
-    
-    // ============================================
-    // LOG PARA DEBUG (remover em produção)
-    // ============================================
-    console.log(`🎨 Tema inicializado: ${temaInicial}`);
-    console.log('💡 Dica: Use Ctrl+K para alternar o tema rapidamente!');
+    if (btnTema) {
+        btnTema.setAttribute('title', 'Alternar tema (Ctrl+K)');
+    }
 });
