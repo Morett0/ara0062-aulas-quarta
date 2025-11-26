@@ -17,6 +17,7 @@
             }
         })();
         
+        // Função de confirmação para deletar (Requisito da Entrega 4)
         function confirmarExclusao(id) {
             if(confirm("Tem certeza que deseja deletar este item do cardápio?")) {
                 window.location.href = "excluir.php?id=" + id;
@@ -61,19 +62,19 @@
                     while($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
                         
-                        // Célula da Imagem (data-label "Imagem")
+                        // Célula da Imagem (com data-label para mobile)
                         echo "<td data-label='Imagem'><img src='" . $row['imagem'] . "' alt='" . $row['item'] . "'></td>";
                         
-                        // Célula do Item (data-label "Item")
+                        // Célula do Item (com data-label para mobile)
                         echo "<td data-label='Item'>" . $row['item'] . "</td>";
                         
-                        // Célula da Descrição (data-label "Descrição")
+                        // Célula da Descrição (com data-label para mobile)
                         echo "<td data-label='Descrição'>" . $row['descricao'] . "</td>";
                         
-                        // Célula do Preço (data-label "Preço")
+                        // Célula do Preço (com data-label para mobile)
                         echo "<td data-label='Preço'>" . $row['preco'] . "</td>";
                         
-                        // Coluna de Ações (data-label "Ações")
+                        // Coluna de Ações (com data-label para mobile)
                         echo "<td data-label='Ações'>";
                         echo "<div class='acoes-botoes'>";
                         echo "<a href='editar.php?id=" . $row['id'] . "' role='button' class='secondary outline'>Editar</a>";

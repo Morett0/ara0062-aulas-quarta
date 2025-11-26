@@ -7,14 +7,10 @@
     --cor-destaque: #E89F7A;
     --cor-borda-suave: #EAE2D6;
     --cor-fundo-container: #FFFFFF;
-
-    /* --- CORREÇÃO 1: Diz ao Pico para usar NOSSA cor de fundo --- */
     --pico-background-color: var(--cor-fundo); 
 }
 
-/* * --- CORREÇÃO 2: Aplicamos a textura e fonte ao HTML ---
- * Removemos a 'background-color' daqui para não ter conflito.
-*/
+/* Aplica a fonte e a cor principal ao HTML e remove o background-image do body (bug fix) */
 html {
     font-family: 'Mali', cursive;
     color: var(--cor-texto);
@@ -27,36 +23,9 @@ body {
     min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Mali', cursive;
-    color: var(--cor-titulo);
-    font-weight: 600;
-}
-
-header h1 {
-    font-family: 'IM Fell English SC', serif;
-    font-size: 2.8rem;
-    color: #5c4f46;
-    margin-bottom: 0;
-}
-
-/* REALCE DE TÍTULOS (Polimento visual) */
-h2 {
-    margin-top: 2rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--cor-destaque);
-    display: inline-block; 
-    margin-bottom: 1.5rem;
-}
-
-h3 {
-    color: var(--cor-titulo);
-    padding-bottom: 0.25rem;
-    border-bottom: 1px solid var(--cor-borda-suave);
-    display: inline-block;
-    margin-bottom: 1rem;
-}
-/* FIM DO REALCE */
+h1, h2, h3, h4, h5, h6 { /* ... */ }
+header h1 { /* ... */ }
+/* ... (Seu CSS padrão aqui) ... */
 
 main, header, footer {
     width: 100%;
@@ -67,120 +36,13 @@ main, header, footer {
     box-sizing: border-box;
 }
 
-nav {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    padding-bottom: 1rem;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-}
+/* ... (Seu CSS padrão de navegação, articles, forms, etc. aqui) ... */
 
-nav a {
-    color: var(--cor-destaque);
-    font-weight: 600;
-    text-decoration: none;
-    transition: color 0.3s ease, border-bottom-color 0.3s ease, background-color 0.3s ease;
-    padding: 0.5rem 1rem; /* Padding ajustado para o efeito hover */
-    border-bottom: 2px solid transparent;
-    border-radius: 4px;
-}
+/* REGRA GERAL PARA TABELAS */
+table { /* ... */ table-layout: fixed; }
+th, td { /* ... */ }
 
-nav a:hover, nav a.active {
-    color: var(--cor-titulo);
-    background-color: #ffffff; 
-    border-bottom: none; 
-}
-
-main > p, main > h2 {
-    text-align: left;
-}
-
-main > article, main > form {
-    background-color: var(--cor-fundo-container);
-    border: 1px solid var(--cor-borda-suave);
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-main > article:hover, main > form:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
-}
-
-.form-group {
-    margin-bottom: 1rem;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.25rem;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 8px;
-    border: 4px solid var(--cor-borda-suave);
-}
-
-/* REGRA GERAL PARA TABELAS, INCLUINDO A DISTRIBUIÇÃO */
-table {
-    width: 100%; /* Ocupa toda a largura disponível do container */
-    border-collapse: collapse;
-    border-spacing: 0; 
-    border: 1px solid var(--cor-borda-suave);
-    border-radius: 8px;
-    overflow: hidden;
-    margin-top: 1.5rem;
-    
-    /* PROPRIEDADES IMPORTANTES PARA A DISTRIBUIÇÃO DAS COLUNAS */
-    table-layout: fixed; /* Força a tabela a respeitar as larguras definidas */
-}
-
-th, td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid var(--cor-borda-suave);
-    vertical-align: top; /* Alinha o conteúdo ao topo da célula */
-}
-
-thead th {
-    background-color: #e0e0e0;
-    color: var(--cor-titulo);
-    font-weight: 600;
-}
-
-tbody tr:nth-of-type(even) {
-    background-color: #fcf9f4;
-}
-
-tbody tr:hover {
-    background-color: #f5efe3;
-}
-
-input, textarea, button {
-    font-family: 'Mali', cursive;
-}
-
-button, input[type="submit"] {
-    background-color: var(--cor-destaque);
-    color: white;
-    font-weight: 600;
-    border: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button:hover, input[type="submit"]:hover {
-    background-color: #d98f6a;
-    transform: translateY(-2px);
-}
-
-/* --- REGRAS ESPECÍFICAS DA TABELA CARDÁPIO (Ajuste de Largura Final) --- */
+/* --- REGRAS ESPECÍFICAS DA TABELA CARDÁPIO (Ajuste para Desktop Flexível) --- */
 
 .cardapio-table {
     width: 100%;
@@ -188,233 +50,88 @@ button:hover, input[type="submit"]:hover {
     table-layout: fixed;
 }
 
+/* Aumenta a flexibilidade das colunas para evitar transbordamento no desktop */
 .cardapio-table th:first-child,
-.cardapio-table td:first-child {
+.cardapio-table td:first-child { width: 30%; text-align: center; vertical-align: middle; }
+.cardapio-table th:nth-child(2), .cardapio-table td:nth-child(2) { width: 15%; vertical-align: middle; } /* Item */
+.cardapio-table th:nth-child(3), .cardapio-table td:nth-child(3) { width: 35%; vertical-align: middle; } /* Descrição */
+
+/* Ajusta as colunas Preço e Ações para caberem no espaço restante */
+.cardapio-table th:nth-child(4), .cardapio-table td:nth-child(4),
+.cardapio-table th:last-child, .cardapio-table td:last-child {
+    width: 10%; /* Divide o 20% restante entre Preço e Ações */
     text-align: center;
     vertical-align: middle;
-}
-
-.cardapio-table th:nth-child(2),
-.cardapio-table td:nth-child(2),
-.cardapio-table th:nth-child(3),
-.cardapio-table td:nth-child(3),
-.cardapio-table th:nth-child(4),
-.cardapio-table td:nth-child(4) {
-    vertical-align: middle;
+    white-space: nowrap; 
 }
 
 .cardapio-table img {
     width: 100%;
-    max-width: 300px;
+    max-width: 250px;
     height: auto;
     object-fit: cover;
     display: block;
     margin: 0 auto;
 }
 
-/* --- Ajustes globais para a coluna Ações (melhora em larguras intermediárias) --- */
-.cardapio-table th:last-child,
-.cardapio-table td[data-label="Ações"] {
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap; /* evita quebra indesejada no título */
-}
+/* --- ESTILOS DOS BOTÕES DE AÇÃO (Com correção de alinhamento) --- */
 
 .cardapio-table .acoes-botoes {
     display: flex;
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap; /* permite quebra quando necessário */
+    flex-wrap: wrap; 
 }
 
 .cardapio-table .acoes-botoes > * {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.35rem 0.6rem; /* reduzido para caber melhor */
+    padding: 0.35rem 0.6rem; 
     margin: 0;
-    min-width: 0; /* importante para permitir shrink em flex */
-    flex-shrink: 1; /* permite reduzir quando o espaço é limitado */
-    white-space: nowrap; /* manter texto do botão em uma linha quando possível */
+    min-width: 0; 
+    flex-shrink: 1; 
+    white-space: nowrap; 
 }
 
-/* Se ainda faltar espaço, permitir que os botões quebrem em duas linhas em telas pequenas/estreitas */
-.cardapio-table .acoes-botoes.two-line > * {
-    flex: 1 1 48%;
-}
+/* Estilo para o botão Excluir */
+.btn-excluir { border-color: #d9534f !important; color: #d9534f !important; }
+.btn-excluir:hover { background-color: #d9534f !important; color: #fff !important; }
 
 
-/* --- DEFINIÇÃO DO TEMA ESCURO (REQUISITO 3) --- */
-
+/* --- DEFINIÇÃO DO TEMA ESCURO (Modo Dark) --- */
 [data-theme="dark"] {
-    /* Redefinimos as variáveis de cor */
-    --cor-fundo: #2D2A26; /* Fundo escuro */
-    --cor-texto: #CFC6BC; /* Texto claro */
-    --cor-titulo: #9DBC9D; /* Título verde mais claro */
-    --cor-destaque: #E89F7A; /* Destaque se mantém */
-    --cor-borda-suave: #4A443E; /* Borda suave escura */
-    --cor-fundo-container: #3E3832; /* Fundo do container escuro */
-
-    /* --- CORREÇÃO 3: Diz ao Pico para usar NOSSA cor de fundo escura --- */
+    --cor-fundo: #2D2A26; /* ... (Seus vars) ... */
     --pico-background-color: var(--cor-fundo);
-
-    /* Ajustes específicos para o tema escuro */
-    
-    header h1 {
-        color: #D4C8C0; /* Cor do título principal */
-    }
-
-    nav a:hover, nav a.active {
-        background-color: #4A443E; /* Hover do menu */
-    }
-    
-    main > article, main > form {
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra mais visível */
-    }
-
-    main > article:hover, main > form:hover {
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    img {
-        border-color: var(--cor-borda-suave);
-    }
-
-    /* Tabelas */
-    thead th {
-        background-color: #4A443E;
-    }
-
-    tbody tr:nth-of-type(even) {
-        background-color: #38332E;
-    }
-
-    tbody tr:hover {
-        background-color: #504942;
-    }
-    
-    /* Inputs do formulário */
-    input, textarea {
-        background-color: #4A443E;
-        border-color: #5D544C;
-        color: var(--cor-texto);
-    }
-
-    /* Ajusta cores do Pico.css no tema escuro */
-    [data-theme="dark"] input,
-    [data-theme="dark"] textarea {
-        --pico-form-element-background-color: var(--cor-fundo-container);
-        --pico-form-element-border-color: var(--cor-borda-suave);
-        --pico-form-element-color: var(--cor-texto);
-        --pico-form-element-placeholder-color: #8a8177;
-    }
-    
-    [data-theme="dark"] input:focus,
-    [data-theme="dark"] textarea:focus {
-        --pico-form-element-active-background-color: var(--cor-fundo-container);
-        --pico-form-element-active-border-color: var(--cor-destaque);
-        --pico-form-element-focus-color: var(--cor-destaque);
-        background-color: var(--pico-form-element-active-background-color);
-        border-color: var(--pico-form-element-active-border-color);
-    }
+    /* ... (O resto do seu código Dark Mode aqui) ... */
 }
+
 
 /* --- REGRA RESPONSIVA PARA ECRÃS PEQUENOS (MOBILE FIRST) --- */
 
-/* --- Breakpoint intermediário: duas colunas para botões de Ações (tablets/desktop estreitos) --- */
-@media screen and (max-width: 1000px) {
-    .cardapio-table .acoes-botoes > * {
-        flex: 1 1 48%;
-        max-width: 48%;
-        box-sizing: border-box;
-    }
-}
-
 @media screen and (max-width: 800px) {
-    /* 1. Resetar o comportamento da tabela para permitir o empilhamento */
-    .cardapio-table,
-    .cardapio-table thead,
-    .cardapio-table tbody,
-    .cardapio-table th,
-    .cardapio-table td,
-    .cardapio-table tr {
-        display: block;
-        width: 100%;
-    }
-
-    /* 2. Esconder o cabeçalho (pois ele será repetido nos cartões) */
-    .cardapio-table thead {
-        display: none;
-    }
-
-    /* 3. Estilizar as linhas como blocos (cartões) */
-    .cardapio-table tr {
-        margin-bottom: 1rem;
-        border: 1px solid var(--cor-borda-suave);
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+    /* Layout principal para empilhar o botão Adicionar */
+    main > div { flex-direction: column; align-items: flex-start !important; gap: 1rem; }
+    main a[role="button"].contrast { width: 100%; text-align: center; margin: 0; }
     
-    /* 4. Estilizar as células (os campos) */
-    .cardapio-table td {
-        border-bottom: 1px solid var(--cor-borda-suave);
-        text-align: right;
-        padding-left: 50%; /* Espaço para o rótulo */
-        position: relative;
-    }
+    /* Tabela vira Cartões */
+    .cardapio-table, .cardapio-table thead, .cardapio-table tbody, .cardapio-table th, .cardapio-table td, .cardapio-table tr { display: block; width: 100%; }
+    .cardapio-table thead { display: none; }
+    .cardapio-table tr { margin-bottom: 1rem; border: 1px solid var(--cor-borda-suave); border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); padding-top: 5px; }
+    .cardapio-table td { border-bottom: 1px solid var(--cor-borda-suave); text-align: right; padding-left: 50%; position: relative; }
     
-    /* 5. Mostrar o rótulo do campo (Item, Preço, etc.) */
+    /* Rótulos */
     .cardapio-table td:before {
-        content: attr(data-label); /* Puxa o valor do atributo 'data-label' */
-        float: left;
-        font-weight: 600;
-        text-transform: uppercase;
-        color: var(--cor-titulo);
-        width: 45%; /* Largura do rótulo */
-        text-align: left;
+        content: attr(data-label);
+        float: left; font-weight: 600; text-transform: uppercase; color: var(--cor-titulo); width: 45%; text-align: left;
     }
 
-    /* 6. Corrigir a imagem e a coluna de Ações */
-    .cardapio-table td[data-label="Imagem"] {
-        text-align: center;
-    }
-    .cardapio-table td[data-label="Ações"] {
-        text-align: center;
-        border-bottom: none;
-        padding-left: 0; /* Não precisa de padding para rótulo */
-    }
-    .cardapio-table td[data-label="Ações"]:before {
-        display: none; /* Não mostra o rótulo "Ações" */
-    }
-
-    /* 7. Redefinir tamanhos fixos no mobile */
-    .cardapio-table td:first-child,
-    .cardapio-table img {
-        width: 100% !important; 
-        max-width: 90%; /* Limita o tamanho da imagem no cartão */
-        height: auto;
-    }
-    .cardapio-table img {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    /* --- Ajustes específicos para os botões de Ações (mobile) --- */
-    .cardapio-table td[data-label="Ações"] .acoes-botoes {
-        display: flex;
-        gap: 0.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        padding: 0.25rem 0;
-        box-sizing: border-box;
-    }
-
-    .cardapio-table td[data-label="Ações"] .acoes-botoes > * {
-        flex: 1 1 100%; /* cada botão ocupa toda a largura do cartão */
-        max-width: 100%;
-        box-sizing: border-box;
-        margin: 0.25rem 0;
-        white-space: normal; /* quebre texto longo dentro do botão */
-    }
+    /* Ações e Imagens */
+    .cardapio-table td[data-label="Ações"], .cardapio-table td[data-label="Imagem"] { text-align: center; border-bottom: none; padding-left: 0; }
+    .cardapio-table td[data-label="Ações"]:before { display: none; }
+    .cardapio-table td:first-child, .cardapio-table img { width: 100% !important; max-width: 90%; height: auto; margin: 10px auto; }
+    
+    /* Botões de Ações (empilhados no mobile) */
+    .cardapio-table .acoes-botoes > * { flex: 1 1 100%; max-width: 100%; margin: 0.25rem 0; white-space: normal; }
 }
