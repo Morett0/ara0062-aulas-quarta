@@ -60,13 +60,25 @@
                 if ($result && mysqli_num_rows($result) > 0) {
                     while($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
-                        echo "<td><img src='" . $row['imagem'] . "' alt='" . $row['item'] . "'></td>";
-                        echo "<td>" . $row['item'] . "</td>";
-                        echo "<td>" . $row['descricao'] . "</td>";
-                        echo "<td>" . $row['preco'] . "</td>";
-                        echo "<td>";
-                        echo "<a href='editar.php?id=" . $row['id'] . "' role='button' class='secondary outline' style='margin-bottom: 5px;'>Editar</a><br>";
-                        echo "<button onclick='confirmarExclusao(" . $row['id'] . ")' class='outline contrast' style='border-color: #d9534f; color: #d9534f;'>Excluir</button>";
+                        
+                        // Célula da Imagem (data-label "Imagem")
+                        echo "<td data-label='Imagem'><img src='" . $row['imagem'] . "' alt='" . $row['item'] . "'></td>";
+                        
+                        // Célula do Item (data-label "Item")
+                        echo "<td data-label='Item'>" . $row['item'] . "</td>";
+                        
+                        // Célula da Descrição (data-label "Descrição")
+                        echo "<td data-label='Descrição'>" . $row['descricao'] . "</td>";
+                        
+                        // Célula do Preço (data-label "Preço")
+                        echo "<td data-label='Preço'>" . $row['preco'] . "</td>";
+                        
+                        // Coluna de Ações (data-label "Ações")
+                        echo "<td data-label='Ações'>";
+                        echo "<div class='acoes-botoes'>";
+                        echo "<a href='editar.php?id=" . $row['id'] . "' role='button' class='secondary outline'>Editar</a>";
+                        echo "<button onclick='confirmarExclusao(" . $row['id'] . ")' class='outline contrast btn-excluir'>Excluir</button>";
+                        echo "</div>";
                         echo "</td>";
                         echo "</tr>";
                     }

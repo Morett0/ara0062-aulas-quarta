@@ -291,3 +291,75 @@ button:hover, input[type="submit"]:hover {
         border-color: var(--pico-form-element-active-border-color);
     }
 }
+
+/* --- REGRA RESPONSIVA PARA ECRÃS PEQUENOS (MOBILE FIRST) --- */
+
+@media screen and (max-width: 800px) {
+    /* 1. Resetar o comportamento da tabela para permitir o empilhamento */
+    .cardapio-table,
+    .cardapio-table thead,
+    .cardapio-table tbody,
+    .cardapio-table th,
+    .cardapio-table td,
+    .cardapio-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    /* 2. Esconder o cabeçalho (pois ele será repetido nos cartões) */
+    .cardapio-table thead {
+        display: none;
+    }
+
+    /* 3. Estilizar as linhas como blocos (cartões) */
+    .cardapio-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid var(--cor-borda-suave);
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* 4. Estilizar as células (os campos) */
+    .cardapio-table td {
+        border-bottom: 1px solid var(--cor-borda-suave);
+        text-align: right;
+        padding-left: 50%; /* Espaço para o rótulo */
+        position: relative;
+    }
+    
+    /* 5. Mostrar o rótulo do campo (Item, Preço, etc.) */
+    .cardapio-table td:before {
+        content: attr(data-label); /* Puxa o valor do atributo 'data-label' */
+        float: left;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--cor-titulo);
+        width: 45%; /* Largura do rótulo */
+        text-align: left;
+    }
+
+    /* 6. Corrigir a imagem e a coluna de Ações */
+    .cardapio-table td[data-label="Imagem"] {
+        text-align: center;
+    }
+    .cardapio-table td[data-label="Ações"] {
+        text-align: center;
+        border-bottom: none;
+        padding-left: 0; /* Não precisa de padding para rótulo */
+    }
+    .cardapio-table td[data-label="Ações"]:before {
+        display: none; /* Não mostra o rótulo "Ações" */
+    }
+
+    /* 7. Redefinir tamanhos fixos no mobile */
+    .cardapio-table td:first-child,
+    .cardapio-table img {
+        width: 100% !important; 
+        max-width: 90%; /* Limita o tamanho da imagem no cartão */
+        height: auto;
+    }
+    .cardapio-table img {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
