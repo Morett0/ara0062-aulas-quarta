@@ -708,3 +708,137 @@ tbody tr:hover {
                 color var(--transicao-media),
                 border-color var(--transicao-media);
 }
+/* O container do input */
+input[type="file"] {
+    padding: 0 !important; /* Remove padding interno para o botão encostar na borda */
+    height: 3.5rem; /* Define uma altura fixa para ficar elegante */
+    display: flex;
+    align-items: center; /* Centraliza o texto "Nenhum arquivo..." verticalmente */
+    background-color: var(--cor-fundo-container);
+    border: 2px solid var(--cor-borda-suave);
+    overflow: hidden; /* Garante que nada saia das bordas arredondadas */
+}
+
+/* O botão "Procurar..." ou "Escolher arquivo" */
+input[type="file"]::file-selector-button {
+    height: 100%; /* Ocupa toda a altura do input */
+    border: none;
+    border-right: 2px solid var(--cor-borda-suave);
+    background: linear-gradient(135deg, var(--cor-titulo) 0%, var(--cor-destaque) 100%);
+    color: white;
+    padding: 0 1.5rem;
+    margin-right: 1rem;
+    font-family: var(--fonte-principal);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transicao-rapida);
+}
+
+/* Efeito Hover no botão */
+input[type="file"]::file-selector-button:hover {
+    filter: brightness(1.1); /* Clareia levemente ao passar o mouse */
+}
+
+/* Correção para Webkit antigo (Chrome/Safari) caso necessário */
+input[type="file"]::-webkit-file-upload-button {
+    height: 100%;
+    border: none;
+    border-right: 2px solid var(--cor-borda-suave);
+    background: linear-gradient(135deg, var(--cor-titulo) 0%, var(--cor-destaque) 100%);
+    color: white;
+    padding: 0 1.5rem;
+    margin-right: 1rem;
+    font-family: var(--fonte-principal);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ============================================
+   LIGHTBOX (ZOOM NA IMAGEM)
+   ============================================ */
+
+/* Estilo da imagem na tabela para indicar que é clicável */
+.img-cardapio {
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+}
+
+.img-cardapio:hover {
+    transform: scale(1.05); /* Leve zoom ao passar o mouse */
+}
+
+/* O fundo escuro do modal */
+/* O fundo escuro do modal */
+#modal-zoom {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: fadeIn 0.3s;
+    
+    /* ADICIONADO: Espaçamento para desgrudar das bordas */
+    padding-top: 40px; 
+    padding-bottom: 40px;
+}
+
+/* A imagem ampliada */
+#img-zoom-conteudo {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    
+    /* ALTERADO: Reduzi de 80vh para 70vh para dar mais espaço em cima e embaixo */
+    max-height: 70vh; 
+    
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    animation: zoomIn 0.3s;
+}
+
+/* Legenda da imagem */
+#caption-zoom {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+    font-size: 1.2rem;
+    font-family: var(--fonte-titulo);
+}
+
+/* Botão de fechar (X) */
+.fechar-zoom {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.fechar-zoom:hover,
+.fechar-zoom:focus {
+    color: var(--cor-destaque);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Animação de Zoom */
+@keyframes zoomIn {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}

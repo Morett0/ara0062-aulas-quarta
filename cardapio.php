@@ -29,7 +29,7 @@
     <main>
         <div style="text-align: center; margin-bottom: 2rem;">
             <h2>Para fortalecer o corpo e aquecer a alma.</h2>
-            <p>Explore nossas delícias cuidadosamente preparadas.</p>
+            <p>Explore nossas delícias cuidadosamente preparadas. <br><small>(Clique nas imagens para ampliar)</small></p>
         </div>
 
         <div style="overflow-x: auto;">
@@ -49,8 +49,19 @@
 
                     if ($result && mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
+                            // Sanitização para evitar erros no JS
+                            $imagem = htmlspecialchars($row['imagem']);
+                            $itemNome = htmlspecialchars($row['item']);
+                            
                             echo "<tr>";
-                            echo "<td><img src='{$row['imagem']}' alt='{$row['item']}'></td>";
+                            // AQUI ESTÁ A MUDANÇA: Adicionamos onclick e a classe img-cardapio
+                            echo "<td>
+                                    <img src='{$imagem}' 
+                                         alt='{$itemNome}' 
+                                         class='img-cardapio' 
+                                         onclick='abrirZoom(this.src, \"{$itemNome}\")'
+                                         title='Clique para ampliar'>
+                                  </td>";
                             echo "<td><strong>{$row['item']}</strong></td>";
                             echo "<td>{$row['descricao']}</td>";
                             echo "<td><strong>{$row['preco']}</strong></td>";
@@ -65,10 +76,42 @@
         </div>
     </main>
 
+    <div id="modal-zoom" onclick="fecharZoom()">
+        <span class="fechar-zoom">&times;</span>
+        <img class="modal-conteudo" id="img-zoom-conteudo">
+        <div id="caption-zoom"></div>
+    </div>
+
     <footer>
         <p>&copy; 2025 O Refúgio do Viajante.</p>
         <small><a href="login.php" class="secondary">Área Restrita</a></small>
     </footer>
+
     <script src="js/tema.js"></script>
+    
+    <script>
+        // Abre o modal
+        function abrirZoom(src, alt) {
+            var modal = document.getElementById("modal-zoom");
+            var modalImg = document.getElementById("img-zoom-conteudo");
+            var captionText = document.getElementById("caption-zoom");
+            
+            modal.style.display = "flex";
+            modalImg.src = src;
+            captionText.innerHTML = alt;
+        }
+
+        // Fecha o modal
+        function fecharZoom() {
+            document.getElementById("modal-zoom").style.display = "none";
+        }
+
+        // Fecha também se apertar ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                fecharZoom();
+            }
+        });
+    </script>
 </body>
 </html>

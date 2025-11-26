@@ -1,7 +1,6 @@
 <?php
-include 'auth.php'; // Adicione esta linha na primeira linha do arquivo
+include 'auth.php'; // Proteção
 include 'conexao.php';
-// ... resto do código
 ?>
 
 <!DOCTYPE html>
@@ -12,8 +11,7 @@ include 'conexao.php';
     <title>Adicionar Item - O Refúgio</title>
     <link rel="stylesheet" href="pico.css">
     <link rel="stylesheet" href="estilos.css">
-    <script src="js/tema-inline.js"></script> <script>
-        // Script inline do tema caso não tenha separado
+    <script>
         (function() {
             const temaSalvo = localStorage.getItem('tema');
             if (temaSalvo) document.documentElement.setAttribute('data-theme', temaSalvo);
@@ -24,20 +22,20 @@ include 'conexao.php';
     <header>
         <h1>Adicionar Provisão</h1>
         <nav>
-            <a href="cardapio.php">Voltar ao Cardápio</a>
+            <a href="admin.php">Voltar ao Painel</a>
         </nav>
     </header>
 
-    <main>
-        <form action="processa_adicionar.php" method="POST">
+    <main class="container">
+        <form action="processa_adicionar.php" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="item">Nome do Item:</label>
-                <input type="text" id="item" name="item" required>
+                <input type="text" id="item" name="item" required placeholder="Ex: Hidromel Antigo">
             </div>
             
             <div class="form-group">
                 <label for="descricao">Descrição:</label>
-                <textarea id="descricao" name="descricao" required></textarea>
+                <textarea id="descricao" name="descricao" required placeholder="Descreva os sabores e aromas..."></textarea>
             </div>
 
             <div class="form-group">
@@ -46,9 +44,9 @@ include 'conexao.php';
             </div>
 
             <div class="form-group">
-                <label for="imagem">Caminho da Imagem:</label>
-                <input type="text" id="imagem" name="imagem" value="imagens/pao_anao.png" required>
-                <small>Coloque o caminho da imagem (ex: imagens/suco.png)</small>
+                <label for="imagem">Foto do Item:</label>
+                <input type="file" id="imagem" name="imagem" accept="image/*" required>
+                <small>Formatos aceitos: JPG, PNG, GIF</small>
             </div>
 
             <button type="submit">Salvar Novo Item</button>

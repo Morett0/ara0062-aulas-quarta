@@ -1,8 +1,3 @@
-<?php
-include 'auth.php'; // Adicione esta linha na primeira linha do arquivo
-include 'conexao.php';
-// ... resto do código
-?>
 
 <?php
 session_start();
