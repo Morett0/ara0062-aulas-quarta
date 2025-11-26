@@ -59,18 +59,21 @@ h3 {
 /* FIM DO REALCE */
 
 main, header, footer {
-    max-width: 80%;
+    width: 100%;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1rem;
     text-align: center;
+    box-sizing: border-box;
 }
 
 nav {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     justify-content: center;
     padding-bottom: 1rem;
     margin-top: 1rem;
+    flex-wrap: wrap;
 }
 
 nav a {
@@ -118,6 +121,9 @@ main > article:hover, main > form:hover {
 }
 
 img {
+    max-width: 100%;
+    height: auto;
+    display: block;
     border-radius: 8px;
     border: 4px solid var(--cor-borda-suave);
 }
@@ -179,38 +185,28 @@ button:hover, input[type="submit"]:hover {
 .cardapio-table {
     width: 100%;
     margin: 1.5rem auto 0 auto;
+    table-layout: fixed;
 }
 
 .cardapio-table th:first-child,
 .cardapio-table td:first-child {
-    width: 320px; /* Largura fixa para a imagem */
     text-align: center;
+    vertical-align: middle;
 }
 
 .cardapio-table th:nth-child(2),
-.cardapio-table td:nth-child(2) {
-    width: 25%; /* Uma porção do espaço restante */
-    text-align: left;
-    vertical-align: middle;
-}
-
+.cardapio-table td:nth-child(2),
 .cardapio-table th:nth-child(3),
-.cardapio-table td:nth-child(3) {
-    width: 25%; /* Ocupa o espaço restante */
-    text-align: left;
-    vertical-align: middle;
-}
-
+.cardapio-table td:nth-child(3),
 .cardapio-table th:nth-child(4),
 .cardapio-table td:nth-child(4) {
-    width: 25%; /* Largura fixa para o preço */
-    text-align: center;
     vertical-align: middle;
 }
 
 .cardapio-table img {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
     object-fit: cover;
     display: block;
     margin: 0 auto;
@@ -361,5 +357,23 @@ button:hover, input[type="submit"]:hover {
     .cardapio-table img {
         margin-top: 10px;
         margin-bottom: 10px;
+    }
+
+    /* --- Ajustes específicos para os botões de Ações (mobile) --- */
+    .cardapio-table td[data-label="Ações"] .acoes-botoes {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 0.25rem 0;
+        box-sizing: border-box;
+    }
+
+    .cardapio-table td[data-label="Ações"] .acoes-botoes > * {
+        flex: 1 1 100%; /* cada botão ocupa toda a largura do cartão */
+        max-width: 100%;
+        box-sizing: border-box;
+        margin: 0.25rem 0;
+        white-space: normal; /* quebre texto longo dentro do botão */
     }
 }
