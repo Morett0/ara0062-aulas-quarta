@@ -1,137 +1,710 @@
 @import url('https://fonts.googleapis.com/css2?family=Mali:wght@400;600&family=IM+Fell+English+SC&display=swap');
 
+/* ============================================
+   VARIÁVEIS CSS - TEMA CLARO
+   ============================================ */
 :root {
+    /* Paleta de Cores Aprimorada */
     --cor-fundo: #F9EFEF;
     --cor-texto: #5D544C;
     --cor-titulo: #587458;
     --cor-destaque: #E89F7A;
     --cor-borda-suave: #EAE2D6;
     --cor-fundo-container: #FFFFFF;
-    --pico-background-color: var(--cor-fundo); 
+    --cor-sombra: rgba(88, 116, 88, 0.1);
+    --cor-hover: #D88E69;
+    --cor-sucesso: #6B9B7A;
+    --cor-erro: #C85A54;
+    
+    /* Tipografia */
+    --fonte-principal: 'Mali', cursive;
+    --fonte-titulo: 'IM Fell English SC', serif;
+    
+    /* Espaçamentos */
+    --espacamento-xs: 0.25rem;
+    --espacamento-sm: 0.5rem;
+    --espacamento-md: 1rem;
+    --espacamento-lg: 1.5rem;
+    --espacamento-xl: 2rem;
+    
+    /* Transições */
+    --transicao-rapida: 0.2s ease;
+    --transicao-media: 0.3s ease;
+    --transicao-lenta: 0.5s ease;
+    
+    /* Bordas e Sombras */
+    --border-radius: 8px;
+    --sombra-pequena: 0 2px 8px var(--cor-sombra);
+    --sombra-media: 0 4px 16px var(--cor-sombra);
+    --sombra-grande: 0 8px 24px var(--cor-sombra);
 }
 
-/* Aplica a fonte e a cor principal ao HTML e remove o background-image do body (bug fix) */
+/* ============================================
+   ELEMENTOS BASE
+   ============================================ */
 html {
-    font-family: 'Mali', cursive;
+    font-family: var(--fonte-principal);
     color: var(--cor-texto);
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Mali', cursive;
+    font-family: var(--fonte-principal);
     color: var(--cor-texto);
     background-color: var(--cor-fundo);
     min-height: 100vh;
+    transition: background-color var(--transicao-media);
+    line-height: 1.6;
 }
 
-h1, h2, h3, h4, h5, h6 { /* ... */ }
-header h1 { /* ... */ }
-/* ... (Seu CSS padrão aqui) ... */
+/* ============================================
+   TIPOGRAFIA MELHORADA
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-titulo);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: var(--espacamento-md);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
 
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+
+header h1 {
+    font-family: var(--fonte-titulo);
+    font-size: 2.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--cor-titulo) 0%, var(--cor-destaque) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInDown 0.6s ease;
+}
+
+/* ============================================
+   LAYOUT RESPONSIVO
+   ============================================ */
 main, header, footer {
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 1rem;
-    text-align: center;
+    padding: var(--espacamento-lg);
     box-sizing: border-box;
+    animation: fadeIn 0.5s ease;
 }
 
-/* ... (Seu CSS padrão de navegação, articles, forms, etc. aqui) ... */
+header {
+    text-align: center;
+    padding: var(--espacamento-xl) var(--espacamento-lg);
+    background: var(--cor-fundo-container);
+    box-shadow: var(--sombra-pequena);
+    margin-bottom: var(--espacamento-xl);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
 
-/* REGRA GERAL PARA TABELAS */
-table { /* ... */ table-layout: fixed; }
-th, td { /* ... */ }
+footer {
+    text-align: center;
+    padding: var(--espacamento-lg);
+    margin-top: var(--espacamento-xl);
+    border-top: 2px solid var(--cor-borda-suave);
+    color: var(--cor-texto);
+    opacity: 0.8;
+}
 
-/* --- REGRAS ESPECÍFICAS DA TABELA CARDÁPIO (Ajuste para Desktop Flexível) --- */
+/* ============================================
+   NAVEGAÇÃO APRIMORADA
+   ============================================ */
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--espacamento-sm);
+    margin-top: var(--espacamento-lg);
+}
 
+nav a {
+    padding: var(--espacamento-sm) var(--espacamento-md);
+    text-decoration: none;
+    color: var(--cor-texto);
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    transition: all var(--transicao-rapida);
+    position: relative;
+    overflow: hidden;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--cor-destaque);
+    transition: all var(--transicao-rapida);
+    transform: translateX(-50%);
+}
+
+nav a:hover {
+    color: var(--cor-destaque);
+    transform: translateY(-2px);
+}
+
+nav a:hover::before {
+    width: 80%;
+}
+
+nav a.active {
+    background: linear-gradient(135deg, var(--cor-destaque) 0%, var(--cor-hover) 100%);
+    color: white;
+    box-shadow: var(--sombra-pequena);
+}
+
+/* Botão de Tema Melhorado */
+#btn-tema {
+    background: linear-gradient(135deg, var(--cor-titulo) 0%, var(--cor-destaque) 100%);
+    color: white !important;
+    border: none;
+    padding: var(--espacamento-sm) var(--espacamento-lg) !important;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: var(--sombra-pequena);
+    transition: all var(--transicao-rapida);
+    cursor: pointer;
+}
+
+#btn-tema:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--sombra-media);
+}
+
+/* ============================================
+   ARTIGOS E CARDS
+   ============================================ */
+article {
+    background: var(--cor-fundo-container);
+    padding: var(--espacamento-xl);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-media);
+    margin-bottom: var(--espacamento-xl);
+    transition: all var(--transicao-media);
+    border: 1px solid var(--cor-borda-suave);
+}
+
+article:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-grande);
+}
+
+article h2 {
+    color: var(--cor-titulo);
+    margin-bottom: var(--espacamento-lg);
+    padding-bottom: var(--espacamento-sm);
+    border-bottom: 2px solid var(--cor-borda-suave);
+}
+
+article p {
+    line-height: 1.8;
+    color: var(--cor-texto);
+}
+
+/* ============================================
+   FORMULÁRIOS APRIMORADOS
+   ============================================ */
+.form-group {
+    margin-bottom: var(--espacamento-lg);
+    animation: fadeInUp 0.5s ease;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--espacamento-sm);
+    color: var(--cor-titulo);
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: var(--espacamento-md);
+    border: 2px solid var(--cor-borda-suave);
+    border-radius: var(--border-radius);
+    font-family: var(--fonte-principal);
+    transition: all var(--transicao-rapida);
+    background: var(--cor-fundo-container);
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 0 3px rgba(232, 159, 122, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-group small {
+    display: block;
+    margin-top: var(--espacamento-xs);
+    color: var(--cor-texto);
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   BOTÕES MELHORADOS
+   ============================================ */
+button, [role="button"], input[type="submit"] {
+    background: linear-gradient(135deg, var(--cor-titulo) 0%, var(--cor-destaque) 100%);
+    color: white;
+    padding: var(--espacamento-md) var(--espacamento-xl);
+    border: none;
+    border-radius: var(--border-radius);
+    font-family: var(--fonte-principal);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transicao-rapida);
+    box-shadow: var(--sombra-pequena);
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sombra-media);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+/* ============================================
+   TABELA RESPONSIVA MELHORADA
+   ============================================ */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--cor-fundo-container);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--sombra-media);
+    margin: var(--espacamento-xl) 0;
+}
+
+th, td {
+    padding: var(--espacamento-md);
+    text-align: left;
+    border-bottom: 1px solid var(--cor-borda-suave);
+}
+
+th {
+    background: linear-gradient(135deg, var(--cor-titulo) 0%, rgba(88, 116, 88, 0.8) 100%);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.9rem;
+}
+
+tbody tr {
+    transition: all var(--transicao-rapida);
+}
+
+tbody tr:hover {
+    background-color: rgba(232, 159, 122, 0.05);
+    transform: scale(1.01);
+}
+
+/* ============================================
+   TABELA CARDÁPIO - DESKTOP
+   ============================================ */
 .cardapio-table {
     width: 100%;
-    margin: 1.5rem auto 0 auto;
-    table-layout: fixed;
+    margin: var(--espacamento-lg) auto 0 auto;
+    table-layout: auto;
 }
 
-/* Aumenta a flexibilidade das colunas para evitar transbordamento no desktop */
 .cardapio-table th:first-child,
-.cardapio-table td:first-child { width: 30%; text-align: center; vertical-align: middle; }
-.cardapio-table th:nth-child(2), .cardapio-table td:nth-child(2) { width: 15%; vertical-align: middle; } /* Item */
-.cardapio-table th:nth-child(3), .cardapio-table td:nth-child(3) { width: 35%; vertical-align: middle; } /* Descrição */
-
-/* Ajusta as colunas Preço e Ações para caberem no espaço restante */
-.cardapio-table th:nth-child(4), .cardapio-table td:nth-child(4),
-.cardapio-table th:last-child, .cardapio-table td:last-child {
-    width: 10%; /* Divide o 20% restante entre Preço e Ações */
+.cardapio-table td:first-child { 
+    width: 180px; 
     text-align: center;
-    vertical-align: middle;
-    white-space: nowrap; 
+}
+
+.cardapio-table th:nth-child(2), 
+.cardapio-table td:nth-child(2) { 
+    width: 20%;
+    font-weight: 600;
+}
+
+.cardapio-table th:nth-child(3), 
+.cardapio-table td:nth-child(3) { 
+    width: 35%;
+}
+
+.cardapio-table th:nth-child(4), 
+.cardapio-table td:nth-child(4) {
+    width: 15%;
+    text-align: center;
+    font-weight: 600;
+    color: var(--cor-destaque);
+}
+
+.cardapio-table th:last-child, 
+.cardapio-table td:last-child {
+    width: 200px;
+    text-align: center;
 }
 
 .cardapio-table img {
     width: 100%;
-    max-width: 250px;
+    max-width: 150px;
     height: auto;
     object-fit: cover;
     display: block;
     margin: 0 auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-pequena);
+    transition: all var(--transicao-media);
 }
 
-/* --- ESTILOS DOS BOTÕES DE AÇÃO (Com correção de alinhamento) --- */
+.cardapio-table img:hover {
+    transform: scale(1.1);
+    box-shadow: var(--sombra-media);
+}
 
+/* ============================================
+   BOTÕES DE AÇÃO
+   ============================================ */
 .cardapio-table .acoes-botoes {
     display: flex;
-    gap: 0.5rem;
+    gap: var(--espacamento-sm);
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 
 .cardapio-table .acoes-botoes > * {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.35rem 0.6rem; 
+    padding: var(--espacamento-sm) var(--espacamento-md);
     margin: 0;
-    min-width: 0; 
-    flex-shrink: 1; 
-    white-space: nowrap; 
+    min-width: 80px;
+    flex-shrink: 1;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    transition: all var(--transicao-rapida);
 }
 
-/* Estilo para o botão Excluir */
-.btn-excluir { border-color: #d9534f !important; color: #d9534f !important; }
-.btn-excluir:hover { background-color: #d9534f !important; color: #fff !important; }
+.cardapio-table .acoes-botoes a {
+    background: linear-gradient(135deg, var(--cor-titulo) 0%, var(--cor-destaque) 100%);
+    color: white;
+    text-decoration: none;
+}
 
+.btn-excluir { 
+    border: 2px solid var(--cor-erro) !important;
+    background: transparent !important;
+    color: var(--cor-erro) !important;
+}
 
-/* --- DEFINIÇÃO DO TEMA ESCURO (Modo Dark) --- */
+.btn-excluir:hover { 
+    background: var(--cor-erro) !important;
+    color: white !important;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   TEMA ESCURO MELHORADO
+   ============================================ */
 [data-theme="dark"] {
-    --cor-fundo: #2D2A26; /* ... (Seus vars) ... */
-    --pico-background-color: var(--cor-fundo);
-    /* ... (O resto do seu código Dark Mode aqui) ... */
+    --cor-fundo: #1A1F2E;
+    --cor-texto: #E8EAED;
+    --cor-titulo: #7FA87F;
+    --cor-destaque: #F4A460;
+    --cor-borda-suave: #2A3140;
+    --cor-fundo-container: #242B3D;
+    --cor-sombra: rgba(0, 0, 0, 0.3);
+    --cor-hover: #FFA07A;
+    --cor-sucesso: #81B89D;
+    --cor-erro: #E87A7A;
 }
 
+[data-theme="dark"] body {
+    background: linear-gradient(135deg, #1A1F2E 0%, #242B3D 100%);
+}
 
-/* --- REGRA RESPONSIVA PARA ECRÃS PEQUENOS (MOBILE FIRST) --- */
+[data-theme="dark"] header {
+    background: var(--cor-fundo-container);
+    border-bottom: 2px solid var(--cor-borda-suave);
+}
 
+[data-theme="dark"] table th {
+    background: linear-gradient(135deg, #2A3140 0%, #1A1F2E 100%);
+}
+
+[data-theme="dark"] tbody tr:hover {
+    background-color: rgba(127, 168, 127, 0.1);
+}
+
+/* ============================================
+   ANIMAÇÕES
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* ============================================
+   RESPONSIVIDADE MOBILE
+   ============================================ */
 @media screen and (max-width: 800px) {
-    /* Layout principal para empilhar o botão Adicionar */
-    main > div { flex-direction: column; align-items: flex-start !important; gap: 1rem; }
-    main a[role="button"].contrast { width: 100%; text-align: center; margin: 0; }
+    /* Layout principal */
+    main > div { 
+        flex-direction: column; 
+        align-items: stretch !important; 
+        gap: var(--espacamento-md);
+    }
     
-    /* Tabela vira Cartões */
-    .cardapio-table, .cardapio-table thead, .cardapio-table tbody, .cardapio-table th, .cardapio-table td, .cardapio-table tr { display: block; width: 100%; }
-    .cardapio-table thead { display: none; }
-    .cardapio-table tr { margin-bottom: 1rem; border: 1px solid var(--cor-borda-suave); border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); padding-top: 5px; }
-    .cardapio-table td { border-bottom: 1px solid var(--cor-borda-suave); text-align: right; padding-left: 50%; position: relative; }
+    main a[role="button"].contrast { 
+        width: 100%; 
+        text-align: center; 
+        margin: 0;
+    }
     
-    /* Rótulos */
+    /* Tipografia Mobile */
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    
+    header h1 { font-size: 2rem; }
+    
+    /* Navegação Mobile */
+    nav {
+        flex-direction: column;
+        gap: var(--espacamento-sm);
+    }
+    
+    nav a {
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* Tabela vira Cards no Mobile */
+    .cardapio-table, 
+    .cardapio-table thead, 
+    .cardapio-table tbody, 
+    .cardapio-table th, 
+    .cardapio-table td, 
+    .cardapio-table tr { 
+        display: block; 
+        width: 100%;
+    }
+    
+    .cardapio-table thead { 
+        display: none;
+    }
+    
+    .cardapio-table tr { 
+        margin-bottom: var(--espacamento-lg);
+        border: 2px solid var(--cor-borda-suave);
+        border-radius: var(--border-radius);
+        box-shadow: var(--sombra-media);
+        padding: var(--espacamento-md);
+        background: var(--cor-fundo-container);
+        transition: all var(--transicao-media);
+    }
+    
+    .cardapio-table tr:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--sombra-grande);
+    }
+    
+    .cardapio-table td { 
+        border-bottom: 1px solid var(--cor-borda-suave);
+        text-align: right;
+        padding: var(--espacamento-md);
+        position: relative;
+        padding-left: 50%;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    
+    .cardapio-table td:last-child {
+        border-bottom: none;
+    }
+    
+    /* Rótulos Mobile */
     .cardapio-table td:before {
         content: attr(data-label);
-        float: left; font-weight: 600; text-transform: uppercase; color: var(--cor-titulo); width: 45%; text-align: left;
+        position: absolute;
+        left: var(--espacamento-md);
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--cor-titulo);
+        text-align: left;
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
     }
 
-    /* Ações e Imagens */
-    .cardapio-table td[data-label="Ações"], .cardapio-table td[data-label="Imagem"] { text-align: center; border-bottom: none; padding-left: 0; }
-    .cardapio-table td[data-label="Ações"]:before { display: none; }
-    .cardapio-table td:first-child, .cardapio-table img { width: 100% !important; max-width: 90%; height: auto; margin: 10px auto; }
+    /* Ações e Imagens Mobile */
+    .cardapio-table td[data-label="Ações"], 
+    .cardapio-table td[data-label="Imagem"] { 
+        text-align: center;
+        border-bottom: 1px solid var(--cor-borda-suave);
+        padding-left: 0;
+        justify-content: center;
+    }
     
-    /* Botões de Ações (empilhados no mobile) */
-    .cardapio-table .acoes-botoes > * { flex: 1 1 100%; max-width: 100%; margin: 0.25rem 0; white-space: normal; }
+    .cardapio-table td[data-label="Ações"]:before,
+    .cardapio-table td[data-label="Imagem"]:before { 
+        display: none;
+    }
+    
+    .cardapio-table td:first-child, 
+    .cardapio-table img { 
+        width: 100% !important;
+        max-width: 200px;
+        height: auto;
+        margin: var(--espacamento-md) auto;
+        border-radius: var(--border-radius);
+    }
+    
+    /* Botões de Ações Mobile */
+    .cardapio-table .acoes-botoes { 
+        flex-direction: column;
+        width: 100%;
+        gap: var(--espacamento-sm);
+    }
+    
+    .cardapio-table .acoes-botoes > * { 
+        width: 100%;
+        margin: 0;
+    }
+    
+    /* Espaçamentos Mobile */
+    main, header, footer {
+        padding: var(--espacamento-md);
+    }
+}
+
+/* ============================================
+   TABLETS (768px - 1024px)
+   ============================================ */
+@media screen and (min-width: 801px) and (max-width: 1024px) {
+    .cardapio-table th:nth-child(3), 
+    .cardapio-table td:nth-child(3) { 
+        width: 30%;
+    }
+    
+    .cardapio-table .acoes-botoes > * {
+        font-size: 0.85rem;
+        padding: var(--espacamento-xs) var(--espacamento-sm);
+        min-width: 70px;
+    }
+}
+
+/* ============================================
+   UTILITÁRIOS
+   ============================================ */
+.text-center { text-align: center; }
+.mb-0 { margin-bottom: 0 !important; }
+.mt-lg { margin-top: var(--espacamento-lg); }
+.p-lg { padding: var(--espacamento-lg); }
+
+/* Acessibilidade */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Estados de Loading */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    animation: pulse 1.5s infinite;
+}
+
+/* Transição suave entre temas */
+* {
+    transition: background-color var(--transicao-media), 
+                color var(--transicao-media),
+                border-color var(--transicao-media);
 }
